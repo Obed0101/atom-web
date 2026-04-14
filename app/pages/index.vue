@@ -538,12 +538,18 @@ const sprints: Sprint[] = [
               :class="heroMode === 'exo' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
               :aria-hidden="heroMode !== 'exo'"
             >
-              <img
-                src="/exogrande.png"
-                alt="Render de A.T.O.M. en modo exoesqueleto"
-                class="h-full w-full object-cover object-center"
-                loading="lazy"
-              />
+              <div
+                class="relative h-full w-full"
+                style="background: radial-gradient(ellipse at 50% 85%, #2a3142 0%, #1a1f2b 50%, #0f131a 100%);"
+              >
+                <img
+                  src="/exogrande.png"
+                  alt="Render de A.T.O.M. en modo exoesqueleto"
+                  class="h-full w-full object-contain"
+                  style="object-position: center 85%;"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
 
