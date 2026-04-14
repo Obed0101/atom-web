@@ -185,6 +185,19 @@ const bomItems: BomItem[] = [
 const bomTotal = 2542;
 const bomMax = Math.max(...bomItems.map((i) => i.cost));
 
+// Costo real del proyecto completo (prototipo funcional) — incluye labor + certificaciones + testing
+const projectCostItems: BomItem[] = [
+  { category: "Hardware (BOM componentes)", cost: 2542 },
+  { category: "Mano de obra ingenieria (~250h CAD/PCB/firmware)", cost: 8000 },
+  { category: "Prototipado + 3-5 iteraciones", cost: 3500 },
+  { category: "Certificaciones (Panama + export-ready)", cost: 6000 },
+  { category: "Testing + lab + maniqui", cost: 3000 },
+  { category: "Herramientas + fixtures", cost: 2000 },
+  { category: "Contingencia 25%", cost: 6000 },
+];
+const projectCostTotal = projectCostItems.reduce((sum, i) => sum + i.cost, 0); // 31,042
+const projectCostMax = Math.max(...projectCostItems.map((i) => i.cost));
+
 const voiceCommands = [
   "levantame",
   "sientame",
@@ -915,71 +928,145 @@ const sprints: Sprint[] = [
     aria-labelledby="componentes-title"
   >
     <div class="container-atom py-20 md:py-28">
-      <div class="grid gap-12 lg:grid-cols-[4fr_6fr] lg:gap-16">
-        <div data-motion="fade-up">
-          <p class="eyebrow">BOM</p>
-          <h2
-            id="componentes-title"
-            class="mt-4 font-display text-section font-semibold text-atom-navy"
-          >
-            Presupuesto cerrado en USD 2,542.
-          </h2>
-          <p class="mt-4 text-body text-atom-navy/70">
-            Cotizaciones al 2026-04-13 con proveedores locales (Cognix,
-            Metalurgica del Istmo) y envio internacional desde Aliexpress,
-            Amazon, Digikey y JLCPCB.
-          </p>
-          <p class="mt-4 text-body text-atom-navy/70">
-            Incluye 15% de contingencia y envios. Para el entregable academico
-            actual no se requiere compra — solo documentacion del BOM.
-          </p>
+      <div data-motion="fade-up" class="mb-12 max-w-3xl">
+        <p class="eyebrow">BOM</p>
+        <h2
+          id="componentes-title"
+          class="mt-4 font-display text-section font-semibold text-atom-navy"
+        >
+          Presupuesto hardware vs costo total del proyecto.
+        </h2>
+        <p class="mt-4 text-body text-atom-navy/70">
+          El BOM de componentes fisicos cuesta <span class="font-semibold text-atom-navy">USD 2,542</span>.
+          Pero un prototipo funcional completo incluye mano de obra de ingenieria, prototipado con iteraciones,
+          certificaciones y testing — que lleva el costo real a <span class="font-semibold text-atom-navy">USD {{ projectCostTotal.toLocaleString() }}</span>.
+          Ambas cifras son publicas para que el proyecto sea reproducible.
+        </p>
+      </div>
 
-          <div class="mt-8 rounded-2xl border border-atom-blue/20 bg-atom-blue/5 p-6">
-            <p class="font-mono text-[11px] uppercase tracking-label text-atom-blue">
-              Total prototipo funcional
-            </p>
-            <p class="mt-2 font-display text-4xl font-semibold text-atom-navy">
-              <CountUp :to="bomTotal" prefix="USD " :duration="1600" />
-            </p>
-            <p class="mt-1 text-xs text-atom-navy/60">
-              Antes: USD 2,800-3,500 con triple modo.
-            </p>
-          </div>
-        </div>
-
-        <div class="space-y-4" data-motion="fade-up">
-          <div
-            v-for="(item, idx) in bomItems"
-            :key="item.category"
-            class="group"
-            :data-motion-delay="idx * 50"
-          >
-            <div class="flex items-baseline justify-between gap-4">
-              <span class="text-sm font-medium text-atom-navy">
-                {{ item.category }}
-              </span>
-              <span class="font-mono text-sm tabular-nums text-atom-navy/70">
-                <CountUp :to="item.cost" prefix="USD " :duration="1300" />
-              </span>
+      <div class="grid gap-8 lg:grid-cols-2 lg:gap-10">
+        <!-- Columna 1: HARDWARE BOM -->
+        <div
+          class="rounded-3xl border border-atom-border bg-atom-surface-soft/40 p-8"
+          data-motion="fade-up"
+        >
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-label text-atom-navy/50">
+                Columna 1 · Componentes
+              </p>
+              <h3 class="mt-1 font-display text-xl font-semibold text-atom-navy">
+                Hardware (BOM)
+              </h3>
             </div>
-            <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-atom-surface-soft">
-              <div
-                class="h-full rounded-full bg-gradient-to-r from-atom-blue to-atom-accent transition-[width] duration-500"
-                :style="{ width: `${(item.cost / bomMax) * 100}%` }"
-              />
-            </div>
-          </div>
-
-          <div class="mt-8 flex items-baseline justify-between border-t border-atom-border pt-6">
-            <span class="font-display text-base font-semibold text-atom-navy">
-              Total
+            <span class="rounded-full border border-atom-navy/15 bg-white px-3 py-1 font-mono text-[10px] uppercase tracking-label text-atom-navy/60">
+              Cotizado 2026-04-13
             </span>
-            <span class="font-mono text-xl font-semibold tabular-nums text-atom-blue">
+          </div>
+          <p class="mt-4 font-display text-4xl font-semibold text-atom-navy">
+            <CountUp :to="bomTotal" prefix="USD " :duration="1600" />
+          </p>
+          <p class="mt-1 text-xs text-atom-navy/60">
+            Proveedores locales (Cognix, Metalurgica del Istmo) + Aliexpress, Amazon, Digikey, JLCPCB. Contingencia 15% incluida.
+          </p>
+
+          <div class="mt-6 space-y-3">
+            <div
+              v-for="(item, idx) in bomItems"
+              :key="item.category"
+              :data-motion-delay="idx * 40"
+            >
+              <div class="flex items-baseline justify-between gap-4">
+                <span class="text-sm font-medium text-atom-navy">
+                  {{ item.category }}
+                </span>
+                <span class="font-mono text-sm tabular-nums text-atom-navy/70">
+                  <CountUp :to="item.cost" prefix="USD " :duration="1300" />
+                </span>
+              </div>
+              <div class="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-atom-blue to-atom-accent transition-[width] duration-500"
+                  :style="{ width: `${(item.cost / bomMax) * 100}%` }"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-baseline justify-between border-t border-atom-border/60 pt-4">
+            <span class="font-display text-sm font-semibold text-atom-navy">
+              Total hardware
+            </span>
+            <span class="font-mono text-base font-semibold tabular-nums text-atom-blue">
               <CountUp :to="bomTotal" prefix="USD " :duration="1800" />
             </span>
           </div>
         </div>
+
+        <!-- Columna 2: COSTO TOTAL DEL PROYECTO -->
+        <div
+          class="rounded-3xl border border-atom-blue/30 bg-gradient-to-br from-atom-blue/5 to-atom-accent/5 p-8 shadow-sm"
+          data-motion="fade-up"
+          data-motion-delay="150"
+        >
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-label text-atom-blue">
+                Columna 2 · Proyecto completo
+              </p>
+              <h3 class="mt-1 font-display text-xl font-semibold text-atom-navy">
+                Costo total del prototipo
+              </h3>
+            </div>
+            <span class="rounded-full border border-atom-blue/25 bg-white px-3 py-1 font-mono text-[10px] uppercase tracking-label text-atom-blue">
+              HW + labor + cert
+            </span>
+          </div>
+          <p class="mt-4 font-display text-4xl font-semibold text-atom-navy">
+            <CountUp :to="projectCostTotal" prefix="USD " :duration="1600" />
+          </p>
+          <p class="mt-1 text-xs text-atom-navy/60">
+            Prototipo funcional end-to-end listo para demo academica + validacion tecnica. No incluye produccion serie.
+          </p>
+
+          <div class="mt-6 space-y-3">
+            <div
+              v-for="(item, idx) in projectCostItems"
+              :key="item.category"
+              :data-motion-delay="idx * 40"
+            >
+              <div class="flex items-baseline justify-between gap-4">
+                <span class="text-sm font-medium text-atom-navy">
+                  {{ item.category }}
+                </span>
+                <span class="font-mono text-sm tabular-nums text-atom-navy/70">
+                  <CountUp :to="item.cost" prefix="USD " :duration="1300" />
+                </span>
+              </div>
+              <div class="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-atom-blue to-atom-accent transition-[width] duration-500"
+                  :style="{ width: `${(item.cost / projectCostMax) * 100}%` }"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-baseline justify-between border-t border-atom-blue/20 pt-4">
+            <span class="font-display text-sm font-semibold text-atom-navy">
+              Total proyecto
+            </span>
+            <span class="font-mono text-base font-semibold tabular-nums text-atom-blue">
+              <CountUp :to="projectCostTotal" prefix="USD " :duration="1800" />
+            </span>
+          </div>
+        </div>
       </div>
+
+      <p class="mt-8 text-xs text-atom-navy/55">
+        Precio sugerido por unidad en venta comercial (amortizando R&amp;D sobre 20–50 unidades): USD 12,000–18,000.
+        Entregable academico actual cubre solo la documentacion y diseño conceptual; la construccion fisica se proyecta a cursos posteriores.
+      </p>
     </div>
   </section>
 
