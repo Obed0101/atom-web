@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-bg: #ffffff;
+  --theme-fg: #181d26;
+  --theme-fg-weak: rgba(4, 14, 32, 0.69);
+  --theme-primary: #1b61c9;
+  --theme-accent: #00d4ff;
+  --theme-border: #e0e2e6;
+  --theme-surface-soft: #f8fafc;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Haas", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  background: var(--theme-bg);
+  color: var(--theme-fg);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: 0.008em;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn bg-atom-blue px-6 py-3 text-[16px] font-medium text-white shadow-atom-sm transition-all duration-200 hover:bg-[#174fa8] hover:shadow-atom-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-atom-blue;
+    letter-spacing: 0.008em;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn border border-atom-border bg-white px-6 py-3 text-[16px] font-medium text-atom-navy transition-all duration-200 hover:border-atom-navy hover:bg-atom-surface-soft;
+    letter-spacing: 0.008em;
+  }
+
+  .container-atom {
+    @apply mx-auto w-full max-w-7xl px-5 md:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-atom-blue;
+  }
+
+  .heading-display {
+    @apply font-display text-display-hero font-semibold text-atom-navy;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .text-gradient-atom {
+    background: linear-gradient(120deg, #1b61c9 0%, #00d4ff 50%, #1b61c9 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: atom-gradient 8s ease infinite;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 60px -10px rgba(0, 212, 255, 0.35);
+  }
+}
