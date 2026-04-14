@@ -205,6 +205,52 @@ type Sprint = {
   bullets: string[];
 };
 
+type HeroMode = "pod" | "exo";
+
+const heroMode = ref<HeroMode>("pod");
+const heroPaused = ref(false);
+let heroInterval: ReturnType<typeof setInterval> | null = null;
+let heroResumeTimeout: ReturnType<typeof setTimeout> | null = null;
+
+const heroLabels: Record<HeroMode, { tag: string; label: string }> = {
+  pod: { tag: "Modo 1", label: "Pod personal" },
+  exo: { tag: "Modo 2", label: "Exoesqueleto" },
+};
+
+function startHeroAuto() {
+  if (heroInterval) clearInterval(heroInterval);
+  heroInterval = setInterval(() => {
+    if (!heroPaused.value) {
+      heroMode.value = heroMode.value === "pod" ? "exo" : "pod";
+    }
+  }, 4500);
+}
+
+function selectHeroMode(mode: HeroMode) {
+  heroMode.value = mode;
+  heroPaused.value = true;
+  if (heroInterval) {
+    clearInterval(heroInterval);
+    heroInterval = null;
+  }
+  if (heroResumeTimeout) clearTimeout(heroResumeTimeout);
+  heroResumeTimeout = setTimeout(() => {
+    heroPaused.value = false;
+    startHeroAuto();
+  }, 8000);
+}
+
+onMounted(() => {
+  if (typeof window === "undefined") return;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced) startHeroAuto();
+});
+
+onUnmounted(() => {
+  if (heroInterval) clearInterval(heroInterval);
+  if (heroResumeTimeout) clearTimeout(heroResumeTimeout);
+});
+
 const sprints: Sprint[] = [
   {
     n: "Sprint 0",
@@ -466,37 +512,119 @@ const sprints: Sprint[] = [
         <div
           class="relative overflow-hidden rounded-lg3 shadow-atom-lg ring-1 ring-atom-border/60"
           style="aspect-ratio: 3 / 4;"
+          role="group"
+          aria-label="Visualizacion alternante de los 2 modos de A.T.O.M."
         >
-          <img
+          <div
             data-parallax-hero
-            src="/hero-silla.jpg"
-            alt="Render de A.T.O.M. en modo pod personal"
-            class="h-[112%] w-full object-cover object-center"
+            class="absolute inset-0 h-[112%] w-full"
             style="transform: translate3d(0, -6%, 0) scale(1.02); will-change: transform;"
-            loading="eager"
-          />
+          >
+            <div
+              class="absolute inset-0 transition-all duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none"
+              :class="heroMode === 'pod' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
+              :aria-hidden="heroMode !== 'pod'"
+            >
+              <img
+                src="/hero-silla.jpg"
+                alt="Render de A.T.O.M. en modo pod personal"
+                class="h-full w-full object-cover object-center"
+                loading="eager"
+              />
+            </div>
+
+            <div
+              class="absolute inset-0 transition-all duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none"
+              :class="heroMode === 'exo' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
+              :aria-hidden="heroMode !== 'exo'"
+            >
+              <div
+                class="relative flex h-full w-full items-center justify-center"
+                style="background: radial-gradient(ellipse at 50% 35%, #2a3142 0%, #181d26 60%, #0f131a 100%);"
+              >
+                <div
+                  class="pointer-events-none absolute inset-0"
+                  style="background: radial-gradient(ellipse at center, rgba(0,212,255,0.18) 0%, transparent 65%);"
+                />
+                <div
+                  class="pointer-events-none absolute inset-0 opacity-[0.06]"
+                  style="background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 24px 24px;"
+                />
+                <img
+                  src="/tinyexo.png"
+                  alt="Render de A.T.O.M. en modo exoesqueleto"
+                  class="relative h-auto w-[68%] object-contain drop-shadow-[0_0_50px_rgba(0,212,255,0.45)]"
+                  style="image-rendering: high-quality;"
+                  loading="lazy"
+                />
+                <div
+                  class="pointer-events-none absolute inset-0"
+                  style="background: linear-gradient(180deg, transparent 70%, rgba(15,19,26,0.6) 100%);"
+                />
+              </div>
+            </div>
+          </div>
+
           <div
             class="pointer-events-none absolute inset-0"
             style="background: linear-gradient(160deg, rgba(27,97,201,0.14) 0%, transparent 45%, rgba(0,212,255,0.12) 100%);"
           />
           <div
             class="pointer-events-none absolute inset-x-0 bottom-0 h-32"
-            style="background: linear-gradient(to top, rgba(24,29,38,0.45), transparent);"
+            style="background: linear-gradient(to top, rgba(24,29,38,0.55), transparent);"
           />
-          <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between">
-            <div>
+
+          <div
+            class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/45 px-3 py-1.5 font-mono text-[10px] uppercase tracking-label text-white backdrop-blur transition-colors duration-500"
+            aria-live="polite"
+          >
+            <component
+              :is="heroMode === 'pod' ? Armchair : ArrowUp"
+              :size="13"
+              class="text-atom-accent"
+            />
+            {{ heroLabels[heroMode].tag }} · {{ heroLabels[heroMode].label }}
+          </div>
+
+          <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+            <div class="min-w-0">
               <p class="font-mono text-[10px] uppercase tracking-label text-white/75">
-                Modo 1
+                {{ heroLabels[heroMode].tag }}
               </p>
               <p class="font-display text-xl font-semibold text-white">
-                Pod personal
+                {{ heroLabels[heroMode].label }}
               </p>
             </div>
             <span
-              class="rounded-full border border-white/30 bg-white/10 px-3 py-1 font-mono text-[10px] uppercase tracking-label text-white backdrop-blur"
+              class="flex-shrink-0 rounded-full border border-white/30 bg-white/10 px-3 py-1 font-mono text-[10px] uppercase tracking-label text-white backdrop-blur"
             >
               Render concepto
             </span>
+          </div>
+
+          <div
+            class="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2"
+            role="tablist"
+            aria-label="Seleccionar modo del hero"
+          >
+            <button
+              type="button"
+              role="tab"
+              :aria-selected="heroMode === 'pod'"
+              aria-label="Mostrar Modo 1 Pod"
+              class="h-1.5 rounded-full transition-all duration-500"
+              :class="heroMode === 'pod' ? 'w-8 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'"
+              @click="selectHeroMode('pod')"
+            />
+            <button
+              type="button"
+              role="tab"
+              :aria-selected="heroMode === 'exo'"
+              aria-label="Mostrar Modo 2 Exoesqueleto"
+              class="h-1.5 rounded-full transition-all duration-500"
+              :class="heroMode === 'exo' ? 'w-8 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'"
+              @click="selectHeroMode('exo')"
+            />
           </div>
         </div>
         <div
