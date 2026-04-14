@@ -526,7 +526,7 @@ const sprints: Sprint[] = [
               :aria-hidden="heroMode !== 'pod'"
             >
               <img
-                src="/hero-silla.jpg"
+                src="/cargrande.png"
                 alt="Render de A.T.O.M. en modo pod personal"
                 class="h-full w-full object-cover object-center"
                 loading="eager"
@@ -538,30 +538,12 @@ const sprints: Sprint[] = [
               :class="heroMode === 'exo' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
               :aria-hidden="heroMode !== 'exo'"
             >
-              <div
-                class="relative flex h-full w-full items-center justify-center"
-                style="background: radial-gradient(ellipse at 50% 35%, #2a3142 0%, #181d26 60%, #0f131a 100%);"
-              >
-                <div
-                  class="pointer-events-none absolute inset-0"
-                  style="background: radial-gradient(ellipse at center, rgba(0,212,255,0.18) 0%, transparent 65%);"
-                />
-                <div
-                  class="pointer-events-none absolute inset-0 opacity-[0.06]"
-                  style="background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 24px 24px;"
-                />
-                <img
-                  src="/tinyexo.png"
-                  alt="Render de A.T.O.M. en modo exoesqueleto"
-                  class="relative h-auto w-[68%] object-contain drop-shadow-[0_0_50px_rgba(0,212,255,0.45)]"
-                  style="image-rendering: high-quality;"
-                  loading="lazy"
-                />
-                <div
-                  class="pointer-events-none absolute inset-0"
-                  style="background: linear-gradient(180deg, transparent 70%, rgba(15,19,26,0.6) 100%);"
-                />
-              </div>
+              <img
+                src="/exogrande.png"
+                alt="Render de A.T.O.M. en modo exoesqueleto"
+                class="h-full w-full object-cover object-center"
+                loading="lazy"
+              />
             </div>
           </div>
 
