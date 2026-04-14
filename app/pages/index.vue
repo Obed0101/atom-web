@@ -557,7 +557,7 @@ const sprints: Sprint[] = [
           />
 
           <div
-            class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/45 px-3 py-1.5 font-mono text-[10px] uppercase tracking-label text-white backdrop-blur transition-colors duration-500"
+            class="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/45 px-3 py-1.5 font-mono text-[10px] uppercase tracking-label text-white backdrop-blur transition-colors duration-500"
             aria-live="polite"
           >
             <component
