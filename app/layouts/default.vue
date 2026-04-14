@@ -50,19 +50,28 @@ const links = [
         </button>
       </div>
 
-      <div v-if="open" class="md:hidden border-t border-atom-border bg-white">
-        <nav class="container-atom flex flex-col gap-1 py-4" aria-label="Navegacion movil">
-          <a
-            v-for="link in links"
-            :key="link.href"
-            :href="link.href"
-            class="rounded-btn px-3 py-2 text-[15px] font-medium text-atom-navy hover:bg-atom-surface-soft"
-            @click="open = false"
-          >
-            {{ link.label }}
-          </a>
-        </nav>
-      </div>
+      <Transition name="mobile-menu">
+        <div v-if="open" class="md:hidden overflow-hidden border-t border-atom-border bg-white">
+          <nav class="container-atom flex flex-col gap-1 py-4" aria-label="Navegacion movil">
+            <a
+              v-for="link in links"
+              :key="link.href"
+              :href="link.href"
+              class="rounded-btn px-3 py-2 text-[15px] font-medium text-atom-navy transition-colors hover:bg-atom-surface-soft"
+              @click="open = false"
+            >
+              {{ link.label }}
+            </a>
+            <a
+              href="#modos"
+              class="mt-2 btn-primary !py-2.5 !text-[14px]"
+              @click="open = false"
+            >
+              Ver los 2 modos
+            </a>
+          </nav>
+        </div>
+      </Transition>
     </header>
 
     <main>
@@ -81,3 +90,24 @@ const links = [
     </footer>
   </div>
 </template>
+
+<style scoped>
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition:
+    max-height 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 220ms ease;
+  max-height: 400px;
+}
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-enter-active,
+  .mobile-menu-leave-active {
+    transition: none;
+  }
+}
+</style>

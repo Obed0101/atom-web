@@ -24,6 +24,8 @@ useHead({
   title: "A.T.O.M. — Un chasis. Dos modos. Libertad.",
 });
 
+useScrollAnimations();
+
 const heroEyebrow = "Proyecto final · Mecatronica ULatina · 2026";
 const heroTitle = "A.T.O.M.";
 const heroSubtitle = "Un chasis. Dos modos. Libertad.";
@@ -377,7 +379,7 @@ const sprints: Sprint[] = [
           :transition="{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }"
           class="mt-9 flex flex-wrap items-center gap-3"
         >
-          <a href="#modos" class="btn-primary">
+          <a href="#modos" class="btn-primary cta-pulse">
             Ver los 2 modos
             <ArrowRight :size="16" />
           </a>
@@ -424,10 +426,11 @@ const sprints: Sprint[] = [
           style="aspect-ratio: 3 / 4;"
         >
           <img
+            data-parallax-hero
             src="/hero-silla.jpg"
             alt="Render de A.T.O.M. en modo pod personal"
-            class="h-full w-full object-cover object-center"
-            style="transform: scale(1.02);"
+            class="h-[112%] w-full object-cover object-center"
+            style="transform: translate3d(0, -6%, 0) scale(1.02); will-change: transform;"
             loading="eager"
           />
           <div
@@ -556,48 +559,62 @@ const sprints: Sprint[] = [
         </p>
       </div>
 
-      <ol
-        class="mt-14 grid gap-6 md:grid-cols-5 md:gap-4"
-        data-motion="fade-up"
-      >
-        <li
-          v-for="(step, idx) in steps"
-          :key="step.n"
-          class="relative"
-          :data-motion-delay="idx * 80"
+      <div class="relative mt-14">
+        <svg
+          class="pointer-events-none absolute inset-x-0 top-[46px] z-0 hidden h-px w-full md:block"
+          aria-hidden="true"
+          preserveAspectRatio="none"
+          viewBox="0 0 1000 1"
         >
-          <div class="flex h-full flex-col rounded-xl border border-atom-border bg-atom-surface-soft p-6 transition-all duration-300 hover:border-atom-blue/40 hover:bg-white hover:shadow-atom-soft">
-            <div class="flex items-center justify-between">
-              <span
-                class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-atom-navy font-mono text-sm font-semibold text-white"
-              >
-                {{ step.n }}
-              </span>
-              <component
-                :is="step.icon"
-                :size="20"
-                class="text-atom-blue"
-              />
-            </div>
-
-            <h3 class="mt-5 font-display text-base font-semibold text-atom-navy">
-              {{ step.title }}
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-atom-navy/70">
-              {{ step.copy }}
-            </p>
-            <p class="mt-auto pt-4 font-mono text-[11px] uppercase tracking-label text-atom-navy/50">
-              {{ step.duration }}
-            </p>
-          </div>
-
-          <div
-            v-if="idx < steps.length - 1"
-            class="pointer-events-none absolute top-1/2 -right-2 hidden h-px w-4 -translate-y-1/2 bg-atom-border md:block"
-            aria-hidden="true"
+          <path
+            data-timeline-path
+            d="M 0 0.5 L 1000 0.5"
+            stroke="#1b61c9"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+            fill="none"
+            vector-effect="non-scaling-stroke"
           />
-        </li>
-      </ol>
+        </svg>
+
+        <ol
+          class="relative z-10 grid gap-6 md:grid-cols-5 md:gap-4"
+          data-motion="fade-up"
+        >
+          <li
+            v-for="(step, idx) in steps"
+            :key="step.n"
+            :data-motion="'fade-up'"
+            :data-motion-delay="idx * 120"
+            class="relative"
+          >
+            <div class="flex h-full flex-col rounded-xl border border-atom-border bg-atom-surface-soft p-6 transition-all duration-300 hover:border-atom-blue/40 hover:bg-white hover:shadow-atom-soft">
+              <div class="flex items-center justify-between">
+                <span
+                  class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-atom-navy font-mono text-sm font-semibold text-white ring-4 ring-atom-surface-soft"
+                >
+                  {{ step.n }}
+                </span>
+                <component
+                  :is="step.icon"
+                  :size="20"
+                  class="text-atom-blue"
+                />
+              </div>
+
+              <h3 class="mt-5 font-display text-base font-semibold text-atom-navy">
+                {{ step.title }}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-atom-navy/70">
+                {{ step.copy }}
+              </p>
+              <p class="mt-auto pt-4 font-mono text-[11px] uppercase tracking-label text-atom-navy/50">
+                {{ step.duration }}
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -677,7 +694,7 @@ const sprints: Sprint[] = [
               Total prototipo funcional
             </p>
             <p class="mt-2 font-display text-4xl font-semibold text-atom-navy">
-              USD {{ bomTotal.toLocaleString("en-US") }}
+              <CountUp :to="bomTotal" prefix="USD " :duration="1600" />
             </p>
             <p class="mt-1 text-xs text-atom-navy/60">
               Antes: USD 2,800-3,500 con triple modo.
@@ -697,7 +714,7 @@ const sprints: Sprint[] = [
                 {{ item.category }}
               </span>
               <span class="font-mono text-sm tabular-nums text-atom-navy/70">
-                USD {{ item.cost.toLocaleString("en-US") }}
+                <CountUp :to="item.cost" prefix="USD " :duration="1300" />
               </span>
             </div>
             <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-atom-surface-soft">
@@ -713,7 +730,7 @@ const sprints: Sprint[] = [
               Total
             </span>
             <span class="font-mono text-xl font-semibold tabular-nums text-atom-blue">
-              USD {{ bomTotal.toLocaleString("en-US") }}
+              <CountUp :to="bomTotal" prefix="USD " :duration="1800" />
             </span>
           </div>
         </div>
