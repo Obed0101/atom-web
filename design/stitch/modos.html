@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1b61c9",
+              accent: "#00D4FF",
+              foreground: "#181d26",
+              background: "#FFFFFF",
+              "soft-gray": "#F7F8FA",
+              border: "#E5E7EB"
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "1rem",
+              "xl": "1.5rem",
+              "2xl": "2rem",
+              "3xl": "3rem",
+              "full": "9999px"
+            },
+            fontFamily: {
+              headline: ["Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              label: ["Inter", "sans-serif"]
+            },
+            letterSpacing: {
+              tightest: "-0.02em",
+              tighter: "-0.01em",
+              normal: "0.008em",
+              widest: "0.1em"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; letter-spacing: 0.008em; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+        }
+        .rim-light:hover {
+            border-color: #00D4FF;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-foreground antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tighter text-slate-900">A.T.O.M.</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-slate-600 font-['Inter'] tracking-[0.008em] text-sm font-medium hover:text-blue-600 transition-colors duration-200 ease-in-out" href="#">Concepto</a>
+<a class="text-blue-700 border-b-2 border-blue-700 pb-1 font-['Inter'] tracking-[0.008em] text-sm font-medium transition-colors duration-200 ease-in-out" href="#">Modos</a>
+<a class="text-slate-600 font-['Inter'] tracking-[0.008em] text-sm font-medium hover:text-blue-600 transition-colors duration-200 ease-in-out" href="#">Tecnología</a>
+<a class="text-slate-600 font-['Inter'] tracking-[0.008em] text-sm font-medium hover:text-blue-600 transition-colors duration-200 ease-in-out" href="#">Equipo</a>
+</div>
+<button class="bg-blue-700 text-white px-6 py-2 rounded-full font-['Inter'] tracking-[0.008em] text-sm font-medium hover:bg-blue-800 transition-all">
+                Invertir
+            </button>
+</div>
+</nav>
+<!-- Main Content: Los 2 Modos -->
+<main class="pt-24 bg-soft-gray min-h-screen">
+<section class="max-w-7xl mx-auto px-8 py-20">
+<!-- Section Header -->
+<div class="text-center mb-16 space-y-4">
+<span class="font-label uppercase tracking-widest text-xs font-semibold text-primary block">
+                    UN CHASIS — DOS CONFIGURACIONES
+                </span>
+<h1 class="text-5xl font-extrabold tracking-tightest text-foreground">
+                    Los 2 modos
+                </h1>
+<p class="max-w-2xl mx-auto text-lg text-slate-500 font-body leading-relaxed">
+                    Silla motorizada o exoesqueleto. Transformación asistida en 15 segundos por comando de voz.
+                </p>
+</div>
+<!-- Configuration Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- LEFT CARD: Modo 1 — Pod Motorizado -->
+<div class="bg-white rounded-3xl overflow-hidden border border-border shadow-sm flex flex-col group transition-all duration-300 hover:shadow-xl rim-light">
+<div class="h-64 bg-gradient-to-b from-[#F0F7FF] to-white flex items-center justify-center p-12">
+<img alt="ATOM Pod Mode" class="max-h-[180px] object-contain" data-alt="Technical illustration of a sleek modern white and blue mobility pod wheelchair with robotic base and ergonomic seat, studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDqG1a7BvG_9HVzFddNkfHW10auoFg5_JyJv9QHZVQ58qJewRNMd5d7Y-HSTHh6K2D-MnJFeLT1kAPSoqowmtJoMq4gh14-1m7pIz8Hkc6jC8OfQUdADwpBAmP_KoOwVS9yZx-xOHqRvFjOA8Z7w47jEZDgfXU-DRvdCNSGqM7gGr3_9LjTUDsQuHLSUGN3QWpyvhz17Gia5SQ6qt-fY7PHZZ9w2PN9JmebPpZCHjrGastv4bmHiDwhPTbWlGo_20wzRWyU0EG8G7f"/>
+</div>
+<div class="p-10 flex-grow flex flex-col">
+<span class="font-label text-xs font-semibold text-primary mb-2">MODO 1</span>
+<h2 class="text-3xl font-bold mb-4 text-foreground">Pod Motorizado</h2>
+<p class="text-slate-600 mb-8 leading-relaxed">
+                            Reposo y transporte diario. Dos motores BLDC 24V, asiento reclinable eléctrico, sensores de proximidad 360°.
+                        </p>
+<!-- Specs List -->
+<div class="grid grid-cols-2 gap-6 mb-10">
+<div class="flex items-center space-x-3">
+<div class="bg-blue-50 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="battery_charging_full">battery_charging_full</span>
+</div>
+<span class="text-sm font-medium text-slate-700">6h autonomía / 20km</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="bg-blue-50 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+</div>
+<span class="text-sm font-medium text-slate-700">25 km/h modo sport</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="bg-blue-50 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<span class="text-sm font-medium text-slate-700">Sensores proximidad x4</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="bg-blue-50 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="wifi_off">wifi_off</span>
+</div>
+<span class="text-sm font-medium text-slate-700">Sin internet requerido</span>
+</div>
+</div>
+<div class="mt-auto">
+<a class="inline-flex items-center text-primary font-semibold group-hover:underline" href="#">
+                                Ver arquitectura 
+                                <span class="material-symbols-outlined ml-2 text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- RIGHT CARD: Modo 2 — Exoesqueleto -->
+<div class="bg-[#181d26] rounded-3xl overflow-hidden shadow-2xl flex flex-col group border border-slate-800 transition-all duration-300 hover:border-accent glow-blue">
+<div class="h-64 bg-slate-900/50 flex items-center justify-center p-12 relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
+<img alt="ATOM Exoskeleton Mode" class="max-h-[180px] object-contain relative z-10" data-alt="Futuristic exoskeleton robotic frame designed for human leg and back support, sleek metallic gray finish with glowing blue LED accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJbrRoO1dr4sMfupx4bnhverWKMU1U1DXwLzxPn7I8ti_r6ApCQtGfVXSgnGjdT2ro2quAhDLMe-68e3bHa8Goim9o2tbExuk_NPzsohhwQpkBVw4tIDGDFJlTjgGDXqVRdK8JspgU5WBGJqbV4LuFIgb02vklu0sh8l8m36c4gekn42Cfo-qgWE_MKtRyBDiyHohRcKCKumC2Z2SkE9viGjZGgmg-dlWhHosGAyvwAXUSj3nlNliPCaHlLYLgPBpoxyDAC0GFHYFf"/>
+</div>
+<div class="p-10 flex-grow flex flex-col text-white">
+<span class="font-label text-xs font-semibold text-accent mb-2">MODO 2</span>
+<h2 class="text-3xl font-bold mb-4">Exoesqueleto</h2>
+<p class="text-slate-400 mb-8 leading-relaxed">
+                            Asistencia corporal vertical. El chasis se eleva, los brazos laterales se despliegan, banda lumbar activa. Marcha asistida hasta 15 minutos para rehabilitación.
+                        </p>
+<!-- Specs List -->
+<div class="grid grid-cols-2 gap-6 mb-10">
+<div class="flex items-center space-x-3">
+<div class="bg-slate-800 p-2 rounded-lg text-accent">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</div>
+<span class="text-sm font-medium text-slate-300">Usuario de pie asistido</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="bg-slate-800 p-2 rounded-lg text-accent">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+</div>
+<span class="text-sm font-medium text-slate-300">15 min sesión rehab</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="bg-slate-800 p-2 rounded-lg text-accent">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<span class="text-sm font-medium text-slate-300">Soporte 4 servos laterales</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="bg-slate-800 p-2 rounded-lg text-accent">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<span class="text-sm font-medium text-slate-300">IMU equilibrio activo</span>
+</div>
+</div>
+<div class="mt-auto">
+<a class="inline-flex items-center text-accent font-semibold group-hover:glow-blue" href="#">
+                                Ver secuencia 
+                                <span class="material-symbols-outlined ml-2 text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-slate-50 border-t border-gray-200">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto space-y-6 md:space-y-0">
+<div class="text-lg font-bold text-slate-900">A.T.O.M.</div>
+<div class="flex space-x-6 text-slate-500 font-['Inter'] text-xs uppercase tracking-[0.1em] font-semibold">
+<a class="hover:text-blue-600 transition-all" href="#">Especificaciones</a>
+<a class="hover:text-blue-600 transition-all" href="#">Documentación</a>
+<a class="hover:text-blue-600 transition-all" href="#">Contacto</a>
+<a class="hover:text-blue-600 transition-all" href="#">Privacidad</a>
+</div>
+<p class="text-slate-500 text-xs uppercase tracking-[0.1em] font-semibold text-center md:text-right">
+                © 2024 A.T.O.M. Proyecto de Mecatrónica ULatina Panamá.
+            </p>
+</div>
+</footer>
+</body></html>

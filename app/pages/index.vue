@@ -17,6 +17,8 @@ import {
   Github,
   FileText,
   Package,
+  Timer,
+  ShieldCheck,
 } from "lucide-vue-next";
 import { motion } from "motion-v";
 
@@ -413,6 +415,46 @@ const sprints: Sprint[] = [
             </div>
           </div>
         </motion.div>
+
+        <motion.div
+          :initial="{ opacity: 0, y: 12 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }"
+          class="mt-8 grid grid-cols-2 gap-6 border-t border-atom-border pt-6 sm:grid-cols-4"
+        >
+          <div class="flex flex-col">
+            <span class="font-display text-xl font-semibold tabular-nums text-atom-navy md:text-2xl">
+              6h
+            </span>
+            <span class="mt-1 font-mono text-[10px] uppercase tracking-label text-atom-navy/55">
+              autonomia
+            </span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display text-xl font-semibold tabular-nums text-atom-navy md:text-2xl">
+              25 km/h
+            </span>
+            <span class="mt-1 font-mono text-[10px] uppercase tracking-label text-atom-navy/55">
+              modo sport
+            </span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display text-xl font-semibold tabular-nums text-atom-navy md:text-2xl">
+              ~15s
+            </span>
+            <span class="mt-1 font-mono text-[10px] uppercase tracking-label text-atom-navy/55">
+              transformacion
+            </span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display text-xl font-semibold tabular-nums text-atom-blue md:text-2xl">
+              USD 2,542
+            </span>
+            <span class="mt-1 font-mono text-[10px] uppercase tracking-label text-atom-navy/55">
+              BOM total
+            </span>
+          </div>
+        </motion.div>
       </div>
 
       <motion.div
@@ -615,6 +657,50 @@ const sprints: Sprint[] = [
           </li>
         </ol>
       </div>
+
+      <div
+        class="mt-14 rounded-2xl border border-atom-navy/15 bg-atom-navy px-8 py-6 shadow-atom-soft"
+        data-motion="fade-up"
+      >
+        <div class="grid gap-6 sm:grid-cols-3 sm:divide-x sm:divide-white/10">
+          <div class="flex items-center gap-4 sm:pr-8">
+            <Timer :size="22" class="text-atom-accent" />
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-label text-white/55">
+                Duracion total
+              </p>
+              <p class="font-mono text-xl font-semibold tabular-nums text-atom-accent">
+                ~15s
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 sm:px-8">
+            <Mic :size="22" class="text-atom-accent" />
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-label text-white/55">
+                Promedio voz
+              </p>
+              <p class="font-mono text-xl font-semibold tabular-nums text-atom-accent">
+                1.2s
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 sm:pl-8">
+            <ShieldCheck :size="22" class="text-atom-accent" />
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-label text-white/55">
+                Safety checks
+              </p>
+              <p class="font-mono text-xl font-semibold tabular-nums text-atom-accent">
+                4
+                <span class="ml-1 text-[10px] font-normal text-white/60">
+                  seta · proximidad · peso · IMU
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -659,6 +745,54 @@ const sprints: Sprint[] = [
             {{ p.copy }}
           </p>
         </article>
+      </div>
+
+      <div
+        class="mt-12 rounded-2xl border border-atom-border bg-white px-8 py-6 shadow-atom-soft"
+        data-motion="fade-up"
+      >
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-atom-border">
+          <div class="flex flex-col lg:px-6">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-label text-atom-navy/45">
+              Arquitectura
+            </span>
+            <span class="mt-1 font-mono text-lg font-semibold tabular-nums text-atom-navy">
+              3 MCU total
+            </span>
+          </div>
+          <div class="flex flex-col lg:px-6">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-label text-atom-navy/45">
+              Instrumentacion
+            </span>
+            <span class="mt-1 font-mono text-lg font-semibold tabular-nums text-atom-navy">
+              10+ sensores
+            </span>
+          </div>
+          <div class="flex flex-col lg:px-6">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-label text-atom-navy/45">
+              Motricidad
+            </span>
+            <span class="mt-1 font-mono text-lg font-semibold tabular-nums text-atom-navy">
+              8 actuadores
+            </span>
+          </div>
+          <div class="flex flex-col lg:px-6">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-label text-atom-navy/45">
+              Conectividad
+            </span>
+            <span class="mt-1 font-mono text-lg font-semibold tabular-nums text-atom-navy">
+              5 protocolos
+            </span>
+          </div>
+          <div class="flex flex-col lg:px-6">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-label text-atom-navy/45">
+              Inversion HW
+            </span>
+            <span class="mt-1 font-mono text-lg font-semibold tabular-nums text-atom-blue">
+              USD 2,542
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -768,13 +902,21 @@ const sprints: Sprint[] = [
             &lt;1.5 s.
           </p>
 
-          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          <div class="mt-8 grid gap-3 sm:grid-cols-3">
             <div class="rounded-lg border border-atom-border bg-white p-4">
               <p class="font-mono text-[11px] uppercase tracking-label text-atom-navy/50">
                 Latencia
               </p>
               <p class="mt-1 font-display text-2xl font-semibold text-atom-navy">
                 &lt;1.5s
+              </p>
+            </div>
+            <div class="rounded-lg border border-atom-border bg-white p-4">
+              <p class="font-mono text-[11px] uppercase tracking-label text-atom-navy/50">
+                Contexto
+              </p>
+              <p class="mt-1 font-display text-2xl font-semibold tabular-nums text-atom-navy">
+                2.4 GB
               </p>
             </div>
             <div class="rounded-lg border border-atom-border bg-white p-4">
