@@ -73,3 +73,24 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Deploy en Vercel
+
+Este repo ya incluye `vercel.json` para deploy estático con Nuxt:
+
+- `installCommand`: `bun install --frozen-lockfile`
+- `buildCommand`: `bun run generate`
+- `outputDirectory`: `.output/public`
+
+Pasos:
+
+1. Importa el repo en Vercel.
+2. Framework preset: **Other** o **Nuxt.js** (ambos funcionan con `vercel.json`).
+3. Deploy.
+
+Para validar local antes de subir:
+
+```bash
+bun run generate
+npx serve .output/public
+```
